@@ -6,29 +6,15 @@ import random
 class QLearningAgent:
     def __init__(self, actions):
         # 행동 = [0, 1, 2, 3] 순서대로 상, 하, 좌, 우
-        self.actions = actions
-        self.learning_rate = 0.1
-        self.discount_factor = 0.9
-        self.epsilon = 0.1
-        self.q_table = defaultdict(lambda: [0.0, 0.0, 0.0, 0.0])
+        pass
 
     # <s, a, r, s'> 샘플로부터 큐함수 업데이트
     def learn(self, state, action, reward, next_state):
-        q_1 = self.q_table[state][action]
-        # 벨만 최적 방정식을 사용한 큐함수의 업데이트
-        q_2 = reward + self.discount_factor * max(self.q_table[next_state])
-        self.q_table[state][action] += self.learning_rate * (q_2 - q_1)
+        pass
 
     # 큐함수에 의거하여 입실론 탐욕 정책에 따라서 행동을 반환
     def get_action(self, state):
-        if random.random() <= self.epsilon:
-            # 무작위 행동 반환
-            action = random.choice(self.actions)
-        else:
-            # 큐함수에 따른 행동 반환
-            state_action = self.q_table[state]
-            action = self.arg_max(state_action)
-        return action
+        pass
 
     @staticmethod
     def arg_max(state_action):
@@ -54,13 +40,11 @@ if __name__ == "__main__":
             env.render()
 
             # 현재 상태에 대한 행동 선택
-            action = agent.get_action(str(state))
+
             # 행동을 취한 후 다음 상태, 보상 에피소드의 종료여부를 받아옴
-            next_state, reward, done = env.step(action)
 
             # <s,a,r,s'>로 큐함수를 업데이트
-            agent.learn(str(state), action, reward, str(next_state))
-            state = next_state
+
             # 모든 큐함수를 화면에 표시
             env.print_value_all(agent.q_table)
 
